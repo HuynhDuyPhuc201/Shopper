@@ -1,0 +1,20 @@
+export const path = {
+    Home: '/',
+    CategoryHome: '/:id',
+    Shop: '/shop',
+    Auth: '/auth',
+    Checkout: '/checkout',
+    ViewCart: '/view-cart',
+    Signin: '/signin',
+    Category: '/:slug-id:catId',
+    ProductDetail: 'product-detail/:slug/:id',
+    Account: {
+        Profile: '/account',
+        Wishlist: '/account/wishlist',
+        Address: '/account/address',
+        AddressEdit: '/account/address-edit/:action/*',
+        MyOrder: '/account/order',
+        MyOrderDetail: '/account/order/:id',
+    },
+    CompleteOrder: '/complete-order/:id',
+};
