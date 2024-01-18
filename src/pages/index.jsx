@@ -285,7 +285,7 @@ function Home() {
                     <div className="row justify-content-center">
                         <Tab defaultValue={0}>
                             <div className="nav justify-content-center mb-10">
-                                {categories?.slice(0, 4).map((item) => {
+                                {categories?.slice(0, 3).map((item) => {
                                     return (
                                         <Tab.Title
                                             index={item.position}

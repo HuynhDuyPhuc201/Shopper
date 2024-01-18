@@ -205,7 +205,7 @@ function Shop() {
                         {/* Products */}
                         {search && <p style={{ fontSize: 30 }}>Kết quả tìm kiếm cho `{search}`</p>}
                         <div className="row">
-                            {!loading
+                            {loading
                                 ? [...Array(6)].map((item, index) => <LoadingCard key={index} />)
                                 : data?.map((item, index) => (
                                       <ProductCard key={index} {...item} categoryDetail={categoryDetail} />
