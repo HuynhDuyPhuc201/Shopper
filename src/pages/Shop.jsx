@@ -21,10 +21,11 @@ function Shop() {
     let location = useLocation().pathname;
 
     useEffect(() => {
-        if (catId || location) {
+        if (catId) {
             getProductAgain();
         }
         return () => {
+            // cleanup func
             setData([]);
         };
     }, [catId]);
