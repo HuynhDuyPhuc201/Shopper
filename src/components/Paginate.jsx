@@ -5,7 +5,11 @@ function Paginate({ totalPage }) {
 
     const currentPage = parseInt(searchParams.get('page') || '1');
     // const search = searchParams.set('search');
+
     const { pathname, search } = useLocation();
+    // http://localhost:3000/shop?page=2
+    // pathname = /shop
+    // search = ?page=2
 
     let start = currentPage - 2;
     let end = currentPage + 2;
@@ -27,7 +31,8 @@ function Paginate({ totalPage }) {
 
         for (let i = start; i <= end; i++) {
             const searchParams = new URLSearchParams(search);
-            searchParams.set('page', i);
+
+            searchParams.set('page', i); // page=i  (i = 1, 2, 3, 4, 5)
 
             const path = `${pathname}?${searchParams.toString()}`;
             list.push(
@@ -52,36 +57,7 @@ function Paginate({ totalPage }) {
                 </li>
 
                 {renderPage()}
-                {/* <li className="page-item active">
-                    <a className="page-link" href="#">
-                        1
-                    </a>
-                </li>
-                <li className="page-item">
-                    <a className="page-link" href="#">
-                        2
-                    </a>
-                </li>
-                <li className="page-item">
-                    <a className="page-link" href="#">
-                        3
-                    </a>
-                </li>
-                <li className="page-item">
-                    <a className="page-link" href="#">
-                        4
-                    </a>
-                </li>
-                <li className="page-item">
-                    <a className="page-link" href="#">
-                        5
-                    </a>
-                </li>
-                <li className="page-item">
-                    <a className="page-link" href="#">
-                        6
-                    </a>
-                </li> */}
+
                 <li className="page-item">
                     <a className="page-link page-link-arrow" href="#">
                         <i className="fa fa-caret-right" />

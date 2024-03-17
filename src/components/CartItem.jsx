@@ -5,9 +5,8 @@ import InputQuantity from './InputQuantity';
 import { useState } from 'react';
 import { path } from '../config/path';
 import { Link, generatePath } from 'react-router-dom';
-import { toggleCartDrawerAction } from '../store/pageReducer';
 
-function CartItem({ product, quantity, allowAction }) {
+function CartItem({ product, quantity, allowAction, onClick }) {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
@@ -36,13 +35,13 @@ function CartItem({ product, quantity, allowAction }) {
         <li className="list-group-item">
             <div className="row align-items-center">
                 <div className="col-4">
-                    <a href="./product.html">
+                    <a href="#!">
                         <img className="img-fluid" src={product.thumbnail_url} alt="..." />
                     </a>
                 </div>
                 <div className="col-8">
                     <p className="font-size-sm font-weight-bold mb-6">
-                        <Link className="text-body" to={pathURL} onClick={() => dispatch(toggleCartDrawerAction())}>
+                        <Link className="text-body" to={pathURL} onClick={onClick}>
                             {product.name}
                         </Link>
                         <br />

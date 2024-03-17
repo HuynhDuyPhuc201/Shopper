@@ -8,9 +8,9 @@ import { Navigate, generatePath, useNavigate } from 'react-router-dom';
 import { path } from '../config/path';
 import { cartService } from '../services/cart.service';
 import { useCart } from '../hooks/useCart';
-import { getCartAction, preCheckoutAction } from '../store/cartReducer';
 import { message } from 'antd';
 import { useCheckout } from '~/hooks/useCheckout';
+import { useTranslate } from '~/core/Components/TranslateProvider';
 
 function Checkout() {
     let { data: address } = useQuery(() => userService.getAddress(), []);
@@ -18,6 +18,7 @@ function Checkout() {
     const navigate = useNavigate();
 
     const { excute: checkout, loading } = useAsync(cartService.checkout);
+    const { t } = useTranslate();
 
     const { setForm, form, validate, register } = useForm({
         fullName: [{ required: true }],
@@ -75,7 +76,7 @@ function Checkout() {
                 <div className="row">
                     <div className="col-12 text-center">
                         {/* Heading */}
-                        <h3 className="mb-4">Checkout</h3>
+                        <h3 className="mb-4">{t('Checkout')}</h3>
                     </div>
                 </div>
                 <div className="row">
@@ -83,7 +84,7 @@ function Checkout() {
                         {/* Form */}
                         <form>
                             {/* Heading */}
-                            <h6 className="mb-7">Billing Details</h6>
+                            <h6 className="mb-7">{t('Payment address')}</h6>
                             {/* Billing details */}
                             <div className="row mb-9">
                                 <div className="col-12">
@@ -107,7 +108,7 @@ function Checkout() {
                             </div>
 
                             {/* Heading */}
-                            <h6 className="mb-7">Shipping Details</h6>
+                            <h6 className="mb-7">{t('Shipping Details')}</h6>
                             {/* Shipping details */}
                             <div className="table-responsive mb-6">
                                 <table className="table table-bordered table-sm table-hover mb-0">
@@ -248,141 +249,6 @@ function Checkout() {
                                     </div>
                                 </div>
                             </div>
-                            {/* Heading */}
-                            <h6 className="mb-7">Payment</h6>
-                            {/* List group */}
-                            <div className="list-group list-group-sm mb-7">
-                                <div className="list-group-item">
-                                    {/* Radio */}
-                                    <div className="custom-control custom-radio">
-                                        {/* Input */}
-                                        <input
-                                            className="custom-control-input"
-                                            id="checkoutPaymentCard"
-                                            name="payment"
-                                            type="radio"
-                                            data-toggle="collapse"
-                                            data-action="show"
-                                            data-target="#checkoutPaymentCardCollapse"
-                                        />
-                                        {/* Label */}
-                                        <label
-                                            className="custom-control-label font-size-sm text-body text-nowrap"
-                                            htmlFor="checkoutPaymentCard"
-                                        >
-                                            Credit Card{' '}
-                                            <img className="ml-2" src="/img/brands/color/cards.svg" alt="..." />
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="list-group-item collapse py-0" id="checkoutPaymentCardCollapse">
-                                    {/* Form */}
-                                    <div className="form-row py-5">
-                                        <div className="col-12">
-                                            <div className="form-group mb-4">
-                                                <label className="sr-only" htmlFor="checkoutPaymentCardNumber">
-                                                    Card Number
-                                                </label>
-                                                <input
-                                                    className="form-control form-control-sm"
-                                                    id="checkoutPaymentCardNumber"
-                                                    type="text"
-                                                    placeholder="Card Number *"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="form-group mb-4">
-                                                <label className="sr-only" htmlFor="checkoutPaymentCardName">
-                                                    Name on Card
-                                                </label>
-                                                <input
-                                                    className="form-control form-control-sm"
-                                                    id="checkoutPaymentCardName"
-                                                    type="text"
-                                                    placeholder="Name on Card *"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-md-4">
-                                            <div className="form-group mb-md-0">
-                                                <label className="sr-only" htmlFor="checkoutPaymentMonth">
-                                                    Month
-                                                </label>
-                                                <select
-                                                    className="custom-select custom-select-sm"
-                                                    id="checkoutPaymentMonth"
-                                                >
-                                                    <option>January</option>
-                                                    <option>February</option>
-                                                    <option>March</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-md-4">
-                                            <div className="form-group mb-md-0">
-                                                <label className="sr-only" htmlFor="checkoutPaymentCardYear">
-                                                    Year
-                                                </label>
-                                                <select
-                                                    className="custom-select custom-select-sm"
-                                                    id="checkoutPaymentCardYear"
-                                                >
-                                                    <option>2017</option>
-                                                    <option>2018</option>
-                                                    <option>2019</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className="col-12 col-md-4">
-                                            <div className="input-group input-group-merge">
-                                                <input
-                                                    className="form-control form-control-sm"
-                                                    id="checkoutPaymentCardCVV"
-                                                    type="text"
-                                                    placeholder="CVV *"
-                                                    required
-                                                />
-                                                <div className="input-group-append">
-                                                    <span
-                                                        className="input-group-text"
-                                                        data-toggle="popover"
-                                                        data-placement="top"
-                                                        data-trigger="hover"
-                                                        data-content="The CVV Number on your credit card or debit card is a 3 digit number on VISA, MasterCard and Discover branded credit and debit cards."
-                                                    >
-                                                        <i className="fe fe-help-circle" />
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="list-group-item">
-                                    {/* Radio */}
-                                    <div className="custom-control custom-radio">
-                                        {/* Input */}
-                                        <input
-                                            className="custom-control-input"
-                                            id="checkoutPaymentPaypal"
-                                            name="payment"
-                                            type="radio"
-                                            data-toggle="collapse"
-                                            data-action="hide"
-                                            data-target="#checkoutPaymentCardCollapse"
-                                        />
-                                        {/* Label */}
-                                        <label
-                                            className="custom-control-label font-size-sm text-body text-nowrap"
-                                            htmlFor="checkoutPaymentPaypal"
-                                        >
-                                            <img src="/img/brands/color/paypal.svg" alt="..." />
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
                             {/* Notes */}
                             <textarea
                                 className="form-control form-control-sm mb-9 mb-md-0 font-size-xs"
@@ -409,13 +275,13 @@ function Checkout() {
                             <div className="card-body">
                                 <ul className="list-group list-group-sm list-group-flush-y list-group-flush-x">
                                     <li className="list-group-item d-flex">
-                                        <span>Subtotal</span>
+                                        <span>{t('Subtotal')}</span>
                                         <span className="ml-auto font-size-sm">
                                             {currency(cart?.subTotal || 0)} vnđ
                                         </span>
                                     </li>
                                     <li className="list-group-item d-flex">
-                                        <span>Tax</span>
+                                        <span>{t('Tax')}</span>
                                         <span className="ml-auto font-size-sm">{currency(tax || 0)} vnđ</span>
                                     </li>
                                     {cart?.promotion && (
@@ -433,13 +299,13 @@ function Checkout() {
                                     )}
 
                                     <li className="list-group-item d-flex">
-                                        <span>Shipping</span>
+                                        <span>{t('Shipping')}</span>
                                         <span className="ml-auto font-size-sm">
                                             {currency(cart?.shipping || 0)} vnđ
                                         </span>
                                     </li>
                                     <li className="list-group-item d-flex font-size-lg font-weight-bold">
-                                        <span>Total</span>
+                                        <span>{t('Total')}</span>
                                         <span className="ml-auto"> {currency(total || 0)} vnđ</span>
                                     </li>
                                 </ul>
@@ -452,7 +318,7 @@ function Checkout() {
                         </p>
                         {/* Button */}
                         <button className="btn btn-block btn-dark" onClick={onCheckoutComplete}>
-                            Place Order
+                            {t('Place Order')}
                         </button>
                     </div>
                 </div>

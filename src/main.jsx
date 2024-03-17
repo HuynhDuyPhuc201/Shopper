@@ -6,7 +6,6 @@ import App from './App';
 import store from './store';
 import { TranslateProvider } from './core/Components/TranslateProvider';
 import vi from './locales/en-vi';
-import { GlobalStyle } from './GlobalStyle';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>

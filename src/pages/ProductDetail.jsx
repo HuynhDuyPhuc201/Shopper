@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useQuery } from '../core/hooks';
 import { productService } from '../services/product.service';
 import { currency } from '../utils/currency';
@@ -9,14 +9,22 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import { Tab } from './../components/Tab';
+import { useEffect } from 'react';
 
 function ProductDetail() {
     const params = useParams();
     const _id = params.id;
 
-    const { data } = useQuery(() => productService.getProductDetail(_id), []);
+    const { data, excute: updateData } = useQuery(() => productService.getProductDetail(_id), []);
     const name = data.name;
     const id = data.id;
+
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        updateData();
+    }, [pathname]);
+
     const { onAddProduct, onAddWishlist, loading } = useProductCard({ name, id });
 
     const img1 = data.images?.[0]?.small_url;
@@ -25,6 +33,12 @@ function ProductDetail() {
     const imgLarge1 = data.images?.[0]?.thumbnail_url;
     const imgLarge2 = data.images?.[1]?.thumbnail_url || imgLarge1;
     const imgLarge3 = data.images?.[2]?.thumbnail_url || imgLarge1 || imgLarge2;
+
+    const descriptTab = [
+        { id: 0, title: 'Description' },
+        { id: 1, title: 'Size & Fit' },
+        { id: 2, title: 'Shipping & Return' },
+    ];
 
     return (
         <>
@@ -54,8 +68,8 @@ function ProductDetail() {
                                 <div className="col-12 col-md-6">
                                     <Swiper
                                         slidesPerView={1}
-                                        onSlideChange={() => console.log('slide change')}
-                                        onSwiper={(swiper) => console.log(swiper)}
+                                        // onSlideChange={() => console.log('slide change')}
+                                        // onSwiper={(swiper) => console.log(swiper)}
                                     >
                                         <SwiperSlide>
                                             <div className="col-12 px-2" style={{ maxWidth: '100%' }}>
@@ -255,7 +269,19 @@ function ProductDetail() {
                             <div className="col-12">
                                 {/* Nav */}
                                 <div className="nav nav-tabs nav-overflow justify-content-start justify-content-md-center border-bottom">
-                                    <Tab.Title
+                                    {descriptTab?.map((item) => {
+                                        return (
+                                            <Tab.Title
+                                                index={item.id}
+                                                className="nav-link active"
+                                                data-toggle="tab"
+                                                // href={`/${}`}
+                                            >
+                                                {item.title}
+                                            </Tab.Title>
+                                        );
+                                    })}
+                                    {/* <Tab.Title
                                         index={0}
                                         className="nav-link active"
                                         data-toggle="tab"
@@ -268,7 +294,7 @@ function ProductDetail() {
                                     </Tab.Title>
                                     <Tab.Title index={2} className="nav-link" data-toggle="tab" href="#shippingTab">
                                         Shipping &amp; Return
-                                    </Tab.Title>
+                                    </Tab.Title> */}
                                 </div>
                                 {/* Content */}
                                 <div className="tab-content">

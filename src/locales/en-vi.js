@@ -10,6 +10,18 @@ const vi = {
     Product: 'Sản phẩm',
     Shop: 'Cửa hàng',
     Docs: 'Tài liệu',
+    // checkout
+    Checkout: 'Thanh toán',
+    'Payment address': 'Địa chỉ thanh toán',
+    'Shipping Details': 'Chi tiết vận chuyển',
+    Subtotal: 'Tổng phụ',
+    Tax: 'Thuế',
+    Shipping: 'Vận chuyển',
+    Total: 'Tổng',
+    'Place Order': 'Đặt hàng',
+    //shop
+    Category: 'Phân loại',
+    'All Products': 'Tất cả sản phẩm',
 };
 
 export default vi;

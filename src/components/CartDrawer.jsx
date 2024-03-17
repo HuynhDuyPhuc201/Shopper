@@ -13,16 +13,24 @@ function CartDrawer() {
     const dispatch = useDispatch();
     const { cart } = useCart();
 
-    const checkoutPage = (e) => {
+    const onCheckoutAndViewCart = (e) => {
         if (cart?.listItems?.length === 0) {
             e.preventDefault();
-            message.warning('Hãy thêm sản phẩm vào giỏ hàng trước khi checkout');
+            message.warning('Hãy thêm sản phẩm vào giỏ hàng');
         }
         dispatch(toggleCartDrawerAction());
     };
-
     return (
-        <Drawer width={450} open={openCartModal} headerStyle={{ display: 'none' }} bodyStyle={{ padding: 0 }}>
+        <Drawer
+            width={450}
+            open={openCartModal}
+            styles={{
+                header: { display: 'none' },
+                body: { padding: 0 },
+            }}
+            // headerStyle={{ display: 'none' }}
+            // bodyStyle={{ padding: 0 }}
+        >
             <div className="modal-dialog modal-dialog-vertical" role="document">
                 <div className="modal-content">
                     <button
@@ -39,20 +47,25 @@ function CartDrawer() {
                     </div>
                     <ul className="list-group list-group-lg list-group-flush">
                         {cart?.listItems?.map((item) => (
-                            <CartItem key={item.product.id} {...item} allowAction />
+                            <CartItem
+                                key={item.product.id}
+                                {...item}
+                                allowAction
+                                onClick={() => dispatch(toggleCartDrawerAction())}
+                            />
                         ))}
                     </ul>
                     <div className="modal-footer line-height-fixed font-size-sm bg-light mt-auto">
                         <strong>Subtotal</strong> <strong className="ml-auto">{currency(cart?.subTotal)} vnđ</strong>
                     </div>
                     <div className="modal-body">
-                        <Link className="btn btn-block btn-dark" to={path.Checkout} onClick={checkoutPage}>
+                        <Link className="btn btn-block btn-dark" to={path.Checkout} onClick={onCheckoutAndViewCart}>
                             Continue to Checkout
                         </Link>
                         <Link
                             className="btn btn-block btn-outline-dark"
                             to={path.ViewCart}
-                            onClick={() => dispatch(toggleCartDrawerAction())}
+                            onClick={onCheckoutAndViewCart}
                         >
                             View Cart
                         </Link>

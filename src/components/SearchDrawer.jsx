@@ -1,14 +1,15 @@
 import { Drawer, Skeleton } from 'antd';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useAsync } from '../core/hooks/useAsync';
 import { productService } from '../services/product.service';
 import { currency } from '../utils/currency';
 import { path } from '../config/path';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, generatePath } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toggleSearchDrawerAction } from './../store/pageReducer';
 import { usePage } from '../hooks/usePage';
 import { useCategory } from '../hooks/useCategory';
+import CartItem from './CartItem';
 
 function SearchDrawer() {
     const [product, setProduct] = useState([]);
@@ -46,7 +47,15 @@ function SearchDrawer() {
     const pathLink = path.Shop + '?search=' + value;
 
     return (
-        <Drawer open={openSearchModal} headerStyle={{ display: 'none' }} bodyStyle={{ padding: 0 }}>
+        <Drawer
+            open={openSearchModal}
+            styles={{
+                header: { display: 'none' },
+                body: { padding: 0 },
+            }}
+            // headerStyle={{ display: 'none' }}
+            // bodyStyle={{ padding: 0 }}
+        >
             <div className="modal-dialog modal-dialog-vertical" role="document">
                 <div className="modal-content">
                     {/* Close */}
@@ -99,28 +108,16 @@ function SearchDrawer() {
                     </div>
                     {/* Body: Results (add `.d-none` to disable it) */}
                     <div className="modal-body border-top font-size-sm">
-                        {/* Heading */}
                         <p>Search Results:</p>
-                        {/* Items */}
                         {message && <p style={{ color: 'red' }}>{message}</p>}
                         {loading
                             ? [...Array(5)].map((e, i) => <Skeleton key={i} style={{ height: 100, marginTop: 10 }} />)
                             : product.map((item) => (
-                                  <div key={item.id} className="row align-items-center position-relative mb-5">
-                                      <div className="col-4 col-md-3">
-                                          <img className="img-fluid" src={item.images?.[0]?.thumbnail_url} alt="..." />
-                                      </div>
-                                      <div className="col position-static">
-                                          {/* Text */}
-                                          <p className="mb-0 font-weight-bold">
-                                              <a className="stretched-link text-body" href="./product.html">
-                                                  {item.name}
-                                              </a>
-                                              <br />
-                                              <span className="text-muted">{currency(item.real_price)}</span>
-                                          </p>
-                                      </div>
-                                  </div>
+                                  <CartItem
+                                      key={item.id}
+                                      product={item}
+                                      onClick={() => dispatch(toggleSearchDrawerAction())}
+                                  />
                               ))}
 
                         {/* Button */}

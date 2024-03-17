@@ -6,19 +6,20 @@ import { productService } from './../services/product.service';
 import { Skeleton } from 'antd';
 import { useCategory } from '../hooks/useCategory';
 import { useCategoryDetail } from '../hooks/useCategoryDetail';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { path } from '~/config/path';
 import LoadingCard from '../components/loading/LoadingCard';
 import { Slider } from '~/components/Slider';
+import { useTranslate } from '~/core/Components/TranslateProvider';
 
 function Shop() {
     const [searchParams] = useSearchParams();
 
     const currentPage = parseInt(searchParams.get('page') || '1');
     const search = searchParams.get('search');
+    const { t } = useTranslate();
 
     const { catId } = useParams();
-    let location = useLocation().pathname;
 
     useEffect(() => {
         if (catId) {
@@ -67,7 +68,7 @@ function Shop() {
                                             <ul className="list-styled mb-0" id="productsNav">
                                                 <li className="list-styled-item">
                                                     <NavLink className="list-styled-link" to={path.Shop}>
-                                                        All Products
+                                                        {t('All Products')}
                                                     </NavLink>
                                                 </li>
                                                 {!categoryLoading ? (
@@ -166,16 +167,16 @@ function Shop() {
                         <div className="row align-items-center mb-7">
                             <div className="col-12 col-md">
                                 {/* Heading */}
-                                <h3 className="mb-1">{categoryDetail?.title || 'All Products'}</h3>
+                                <h3 className="mb-1">{categoryDetail?.title || t('All Products')}</h3>
                                 {/* Breadcrumb */}
                                 <ol className="breadcrumb mb-md-0 font-size-xs text-gray-400">
                                     <li className="breadcrumb-item">
                                         <a className="text-gray-400" href="/">
-                                            Home
+                                            {t('Home')}
                                         </a>
                                     </li>
                                     <li className="breadcrumb-item active">
-                                        {categoryDetail?.title || 'All Products'}
+                                        {categoryDetail?.title || t('All Products')}
                                     </li>
                                 </ol>
                             </div>

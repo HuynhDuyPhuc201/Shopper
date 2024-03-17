@@ -6,7 +6,6 @@ import { path } from './../config/path';
 import { useTranslate } from '../core/Components/TranslateProvider';
 import Select from './Select';
 import { useCart } from '../hooks/useCart';
-import { cn } from '~/core';
 
 function Header() {
     const dispatch = useDispatch();
@@ -24,10 +23,6 @@ function Header() {
     const onOpenCartModal = (e) => {
         e.preventDefault();
         dispatch(toggleCartDrawerAction());
-    };
-
-    const onToggleMenu = () => {
-        setShow(!show);
     };
 
     return (

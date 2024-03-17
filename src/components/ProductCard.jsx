@@ -10,7 +10,6 @@ function ProductCard({ name, price, real_price, images, id, slug, description, c
 
     const { onAddProduct, onAddWishlist, loading, loadingWishlist } = useProductCard({ name, id });
 
-    // const pathURL = generatePath(path.ProductDetail, { slug, id });
     return (
         <div className="col-6 col-md-4">
             {/* Card */}
