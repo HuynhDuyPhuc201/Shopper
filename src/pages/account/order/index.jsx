@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { useCurrentPage } from '~/core/hooks/useCurrentPage';
 import Paginate from '~/components/Paginate';
 import { useAsync, useQuery } from '~/core';
@@ -12,7 +12,9 @@ import { getCartAction } from '~/store/cartReducer';
 import Button from '~/components/Button';
 
 function MyOrder() {
-    const { currentPage } = useCurrentPage();
+    const currentPage = useCurrentPage();
+
+    const _id = useId();
 
     const { data, paginate, loading } = useQuery(() => {
         // nếu mà có `?limit=3&page=${currentPage}` phải thêm query trong orderService
@@ -66,7 +68,7 @@ function MyOrder() {
             {loading
                 ? [...Array(3)].map((item, i) => <Skeleton active key={i} style={{ height: 200 }} />)
                 : data?.map((item, index) => (
-                      <div className="card card-lg mb-5 border" key={item._id}>
+                      <div className="card card-lg mb-5 border" key={index}>
                           <div className="card-body pb-0">
                               {/* Info */}
                               <div className="card card-sm">

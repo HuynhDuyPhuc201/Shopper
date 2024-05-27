@@ -10,10 +10,11 @@ import LoadingCard from '../components/loading/LoadingCard';
 import { Slider } from '~/components/Slider';
 import { useTranslate } from '~/core/Components/TranslateProvider';
 import { useProduct } from '~/hooks/useProduct';
-import { useCurrentPage } from '~/core/hooks/useCurrentPage';
 
 function Shop() {
-    const { currentPage, search } = useCurrentPage();
+    const [searchParams] = useSearchParams();
+    const currentPage = parseInt(searchParams.get('page') || '1');
+    const search = searchParams.get('search');
 
     const { t } = useTranslate();
     const { catId } = useParams();

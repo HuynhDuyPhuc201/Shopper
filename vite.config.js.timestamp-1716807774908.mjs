@@ -1,0 +1,14 @@
+// vite.config.js
+import { defineConfig } from "file:///E:/CFD_REACT/Shopper/node_modules/vite/dist/node/index.js";
+import react from "file:///E:/CFD_REACT/Shopper/node_modules/@vitejs/plugin-react-swc/index.mjs";
+import svgr from "file:///E:/CFD_REACT/Shopper/node_modules/@svgr/rollup/dist/index.js";
+var vite_config_default = defineConfig({
+  plugins: [react(), svgr()],
+  resolve: {
+    alias: [{ find: "~", replacement: "/src" }]
+  }
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJFOlxcXFxDRkRfUkVBQ1RcXFxcU2hvcHBlclwiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiRTpcXFxcQ0ZEX1JFQUNUXFxcXFNob3BwZXJcXFxcdml0ZS5jb25maWcuanNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL0U6L0NGRF9SRUFDVC9TaG9wcGVyL3ZpdGUuY29uZmlnLmpzXCI7aW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSAndml0ZSc7XG5pbXBvcnQgcmVhY3QgZnJvbSAnQHZpdGVqcy9wbHVnaW4tcmVhY3Qtc3djJztcbmltcG9ydCBzdmdyIGZyb20gJ0BzdmdyL3JvbGx1cCc7IC8vIERcdTAwRjluZyByb2xsdXAgXHUwMTExaVxuLy8gaHR0cHM6Ly92aXRlanMuZGV2L2NvbmZpZy9cbmV4cG9ydCBkZWZhdWx0IGRlZmluZUNvbmZpZyh7XG4gICAgcGx1Z2luczogW3JlYWN0KCksIHN2Z3IoKV0sXG4gICAgLy8gYmFzZTogJy4vJ1xuICAgIHJlc29sdmU6IHtcbiAgICAgICAgYWxpYXM6IFt7IGZpbmQ6ICd+JywgcmVwbGFjZW1lbnQ6ICcvc3JjJyB9XSxcbiAgICB9LFxufSk7XG4iXSwKICAibWFwcGluZ3MiOiAiO0FBQW9QLFNBQVMsb0JBQW9CO0FBQ2pSLE9BQU8sV0FBVztBQUNsQixPQUFPLFVBQVU7QUFFakIsSUFBTyxzQkFBUSxhQUFhO0FBQUEsRUFDeEIsU0FBUyxDQUFDLE1BQU0sR0FBRyxLQUFLLENBQUM7QUFBQSxFQUV6QixTQUFTO0FBQUEsSUFDTCxPQUFPLENBQUMsRUFBRSxNQUFNLEtBQUssYUFBYSxPQUFPLENBQUM7QUFBQSxFQUM5QztBQUNKLENBQUM7IiwKICAibmFtZXMiOiBbXQp9Cg==

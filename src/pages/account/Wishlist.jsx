@@ -1,17 +1,18 @@
 import { message } from 'antd';
+import { useSearchParams } from 'react-router-dom';
 import Paginate from '~/components/Paginate';
 import WishlistItem from '~/components/WishlistItem';
 import LoadingCard from '~/components/loading/LoadingCard';
 import { useQuery } from '~/core';
-import { useCurrentPage } from '~/core/hooks/useCurrentPage';
 import { productService } from '~/services/product.service';
 
 function Wishlist() {
-    const currentPage = useCurrentPage();
-
-    const { data, paginate, loading, excute } = useQuery(() => {
-        return productService.getwishlist(`?limit=6&page=${currentPage}`);
-    }, [currentPage]);
+    const [searchParams] = useSearchParams();
+    const currentPage = parseInt(searchParams.get('page') || '1');
+    const { data, paginate, loading, excute } = useQuery(
+        () => productService.getwishlist(`?limit=6&page=${currentPage}`),
+        [currentPage],
+    );
 
     const onRemoveWishlist = (id) => async (e) => {
         const res = await productService.removeWishlist(id);
