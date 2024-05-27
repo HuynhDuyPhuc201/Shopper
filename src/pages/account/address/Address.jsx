@@ -15,7 +15,8 @@ function Address() {
         if (dataAddress === null) {
             dispatch(getAddressAction());
         }
-    }, [dataAddress]);
+    }, []);
+
     return (
         <>
             <div className="row">

@@ -1,5 +1,5 @@
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { useQuery } from '../core/hooks';
+import { useAsync, useQuery } from '../core/hooks';
 import { productService } from '../services/product.service';
 import { currency } from '../utils/currency';
 import { useProductCard } from '~/core/hooks/useProductCard';
@@ -12,6 +12,7 @@ import { Tab } from './../components/Tab';
 import { useEffect } from 'react';
 
 function ProductDetail() {
+    // lấy slug, id... từ url
     const params = useParams();
     const _id = params.id;
 
@@ -66,11 +67,7 @@ function ProductDetail() {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-12 col-md-6">
-                                    <Swiper
-                                        slidesPerView={1}
-                                        // onSlideChange={() => console.log('slide change')}
-                                        // onSwiper={(swiper) => console.log(swiper)}
-                                    >
+                                    <Swiper slidesPerView={1}>
                                         <SwiperSlide>
                                             <div className="col-12 px-2" style={{ maxWidth: '100%' }}>
                                                 <div

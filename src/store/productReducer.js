@@ -12,17 +12,7 @@ export const getCategoryAction = () => {
     return async (dispatch) => {
         try {
             const res = await productService.getAllCategory();
-            dispatch(setCategoryAction(res.data));
-        } catch (error) {}
-    };
-};
-export const setCategoryAction = (data) => ({ type: SET_CATEGORY, payload: data });
-
-export const getWishlistAction = (currentPage) => {
-    return async (dispatch) => {
-        try {
-            const res = await productService.getwishlist(`?page=${1}`);
-            dispatch({ type: SET_WISHLIST, payload: res.data });
+            dispatch({ type: SET_CATEGORY, payload: res.data });
         } catch (error) {}
     };
 };

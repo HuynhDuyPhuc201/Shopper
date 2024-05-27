@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { path } from '../config/path';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Slider } from '~/components/Slider';
 import { Tab } from '~/components/Tab';
-import { useCategory } from '~/hooks/useCategory';
 import { productService } from '~/services/product.service';
 import { useQuery } from '~/core';
 import ProductCard from '~/components/ProductCard';
 import LoadingCard from '~/components/loading/LoadingCard';
 import { useParams } from 'react-router-dom';
+import { useProduct } from '~/hooks/useProduct';
 
 function Home() {
-    const { categories } = useCategory();
+    const { categories } = useProduct();
 
     const { id } = useParams();
 

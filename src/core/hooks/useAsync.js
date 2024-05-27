@@ -6,6 +6,7 @@ export const useAsync = (promise) => {
     const [mess, setMess] = useState('');
 
     // useAsync thường dùng cho service -> click service thì nó sẽ xử lý service đó
+    // Khi nào (click) sử dụng mới gọi tới hàm excute
 
     const excute = async (...rest) => {
         try {

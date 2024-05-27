@@ -12,9 +12,7 @@ import { getCartAction } from '~/store/cartReducer';
 import Button from '~/components/Button';
 
 function MyOrder() {
-    const currentPage = useCurrentPage();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const { currentPage } = useCurrentPage();
 
     const { data, paginate, loading } = useQuery(() => {
         // nếu mà có `?limit=3&page=${currentPage}` phải thêm query trong orderService

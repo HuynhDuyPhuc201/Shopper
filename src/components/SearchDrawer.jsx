@@ -8,8 +8,8 @@ import { Link, NavLink, generatePath } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toggleSearchDrawerAction } from './../store/pageReducer';
 import { usePage } from '../hooks/usePage';
-import { useCategory } from '../hooks/useCategory';
 import CartItem from './CartItem';
+import { useProduct } from '~/hooks/useProduct';
 
 function SearchDrawer() {
     const [product, setProduct] = useState([]);
@@ -17,7 +17,7 @@ function SearchDrawer() {
     const [message, setMessage] = useState('');
     let [value, setValue] = useState('');
     const { openSearchModal } = usePage();
-    const { categories } = useCategory();
+    const { categories } = useProduct();
     const dispatch = useDispatch();
 
     const { excute: getProduct, loading } = useAsync(productService.getProduct);
@@ -96,7 +96,7 @@ function SearchDrawer() {
                                     onChange={(ev) => setValue(ev.currentTarget.value)}
                                     className="form-control"
                                     type="search"
-                                    placeholder="Search"
+                                    placeholder="Search..."
                                 />
                                 <div className="input-group-append">
                                     <button className="btn btn-outline-border" type="submit" onClick={onSearch}>

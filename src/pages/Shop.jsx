@@ -3,23 +3,21 @@ import Paginate from '../components/Paginate';
 import ProductCard from '../components/ProductCard';
 import { useQuery } from './../core/hooks/useQuery';
 import { productService } from './../services/product.service';
-import { Skeleton } from 'antd';
-import { useCategory } from '../hooks/useCategory';
 import { useCategoryDetail } from '../hooks/useCategoryDetail';
 import { useEffect } from 'react';
 import { path } from '~/config/path';
 import LoadingCard from '../components/loading/LoadingCard';
 import { Slider } from '~/components/Slider';
 import { useTranslate } from '~/core/Components/TranslateProvider';
+import { useProduct } from '~/hooks/useProduct';
+import { useCurrentPage } from '~/core/hooks/useCurrentPage';
 
 function Shop() {
-    const [searchParams] = useSearchParams();
+    const { currentPage, search } = useCurrentPage();
 
-    const currentPage = parseInt(searchParams.get('page') || '1');
-    const search = searchParams.get('search');
     const { t } = useTranslate();
-
     const { catId } = useParams();
+    const { categories } = useProduct();
 
     useEffect(() => {
         if (catId) {
@@ -43,7 +41,6 @@ function Shop() {
         );
     }, [currentPage, search]);
 
-    const { categories, loading: categoryLoading } = useCategory();
     const categoryDetail = useCategoryDetail(catId);
 
     return (
@@ -71,22 +68,18 @@ function Shop() {
                                                         {t('All Products')}
                                                     </NavLink>
                                                 </li>
-                                                {!categoryLoading ? (
-                                                    <Skeleton />
-                                                ) : (
-                                                    categories?.map((e) => (
-                                                        <li key={e.id} className="list-styled-item">
-                                                            {/* Toggle */}
-                                                            <NavLink
-                                                                className="list-styled-link"
-                                                                data-toggle="collapse"
-                                                                to={`/${e.slug}`}
-                                                            >
-                                                                {e.title}
-                                                            </NavLink>
-                                                        </li>
-                                                    ))
-                                                )}
+                                                {categories?.map((e) => (
+                                                    <li key={e.id} className="list-styled-item">
+                                                        {/* Toggle */}
+                                                        <NavLink
+                                                            className="list-styled-link"
+                                                            data-toggle="collapse"
+                                                            to={`/${e.slug}`}
+                                                        >
+                                                            {e.title}
+                                                        </NavLink>
+                                                    </li>
+                                                ))}
                                             </ul>
                                         </div>
                                     </div>

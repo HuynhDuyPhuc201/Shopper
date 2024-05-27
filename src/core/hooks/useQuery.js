@@ -8,6 +8,8 @@ export const useQuery = (callbackPromise, dependencyList = []) => {
     const [error, setError] = useState('');
 
     // useQuery thường dùng cho load 1 dữ liệu nào đó
+    // hàm excute ở đây, dùng để load dữ liệu nên set up nó trong useEffect()
+    // và chỉ chạy lần đầu tiên khi component render
 
     useEffect(() => {
         excute();

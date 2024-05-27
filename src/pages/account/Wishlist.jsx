@@ -9,10 +9,9 @@ import { productService } from '~/services/product.service';
 function Wishlist() {
     const currentPage = useCurrentPage();
 
-    const { data, paginate, loading, excute } = useQuery(
-        () => productService.getwishlist(`?limit=6&page=${currentPage}`),
-        [currentPage],
-    );
+    const { data, paginate, loading, excute } = useQuery(() => {
+        return productService.getwishlist(`?limit=6&page=${currentPage}`);
+    }, [currentPage]);
 
     const onRemoveWishlist = (id) => async (e) => {
         const res = await productService.removeWishlist(id);

@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useProductCard } from '../core/hooks/useProductCard';
 import { currency } from '../utils/currency';
 
 function WishlistItem({ name, real_price, images, id, onRemoveWishlist }) {
